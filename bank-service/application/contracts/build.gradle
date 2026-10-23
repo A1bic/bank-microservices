@@ -1,0 +1,5 @@
+description = 'Public API of the application layer: service interfaces, operations, DTOs and exceptions'
+
+dependencies {
+    api libs.swagger.annotations
+}

@@ -1,0 +1,5 @@
+description = 'Ports the application layer needs from the outside world (persistence, exchange rates)'
+
+dependencies {
+    api project(':bank-service:domain')
+}

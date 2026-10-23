@@ -1,0 +1,9 @@
+rootProject.name = 'bank-microservices'
+
+include(
+        // Bank service, split by Clean Architecture layers
+        'bank-service:domain',
+        'bank-service:application',
+        'bank-service:application:abstractions',
+        'bank-service:application:contracts'
+)
