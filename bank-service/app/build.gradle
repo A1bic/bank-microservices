@@ -1,0 +1,28 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
+description = 'Runnable Spring Boot application that wires all bank-service layers together'
+
+dependencies {
+    implementation project(':bank-service:presentation')
+    implementation project(':bank-service:application')
+    implementation project(':bank-service:infrastructure')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
+}
+
+bootJar {
+    archiveFileName = 'bank-service.jar'
+}
+
+jar {
+    enabled = false
+}

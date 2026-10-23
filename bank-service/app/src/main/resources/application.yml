@@ -1,0 +1,55 @@
+# Defaults are for local development (see docker-compose.yml).
+# Any value can be overridden with an environment variable, e.g. SPRING_DATASOURCE_URL or BANK_ADMIN_PASSWORD.
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: bank-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5434/bank
+    username: bank
+    password: bank
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      # The schema is managed by Flyway migrations, Hibernate only checks that entities match it
+      ddl-auto: validate
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: bank-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # Wraps the JSON deserializer so a malformed message is logged and skipped instead of blocking the consumer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: ru.kovalenko.bank.infrastructure.rates.ExchangeRateMessage
+        spring.json.use.type.headers: false
+
+bank:
+  admin:
+    login: admin
+    password: admin
+  kafka:
+    rates-topic: exchange-rates
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  default-produces-media-type: application/json
+  swagger-ui:
+    tags-sorter: alpha

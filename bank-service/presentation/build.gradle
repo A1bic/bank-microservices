@@ -1,0 +1,11 @@
+description = 'REST API: controllers, request models, error handling, security and OpenAPI docs'
+
+dependencies {
+    implementation project(':bank-service:application:contracts')
+    implementation project(':bank-service:domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation libs.springdoc.webmvc.ui
+}
