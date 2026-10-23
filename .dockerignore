@@ -1,0 +1,9 @@
+**/build/
+**/out/
+.gradle/
+.idea/
+.vscode/
+.git/
+*.iml
+*.md
+docker-compose.yml
