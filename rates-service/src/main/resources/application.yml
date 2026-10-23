@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: rates-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        # bank-service maps messages to its own class, so Java type headers are not needed
+        spring.json.add.type.headers: false
+
+rates:
+  topic: exchange-rates
+  currency: USD
+  min-rate: 80
+  max-rate: 100
+  initial-delay: 3s
+  publish-interval: 5s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
